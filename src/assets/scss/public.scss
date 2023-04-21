@@ -43,7 +43,9 @@ $base-font-size-offset: 2px;
 
 @mixin base-section() {
   box-sizing: border-box;
-  padding: 80px 2vw;
   width: 100vw;
+  max-width: 100%;
+  padding: 80px 2vw;
   border-bottom: 1px solid black;
+  background-color: $light-main;
 }

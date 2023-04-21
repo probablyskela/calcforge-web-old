@@ -23,7 +23,7 @@ import { RouterLink } from 'vue-router';
       </nav>
       <div class="authorization">
         <a class="authorization__sign-out" href="#">sign out</a>
-        <a class="authorization__sign-in" href="#">sign in</a>
+        <RouterLink to="/sign-in">sign in</RouterLink>
       </div>
     </div>
   </header>
@@ -42,9 +42,7 @@ import { RouterLink } from 'vue-router';
   display: flex;
   align-items: center;
 
-  a {
-    text-decoration: none;
-    color: $dark-main;
+  a { 
     @include link-underline($dark-main);
     @include fix-text();
   }
