@@ -8,8 +8,9 @@ import TheFooter from './components/TheFooter.vue';
   <TheHeader></TheHeader>
   
   <RouterView />
-
+  
   <TheFooter></TheFooter>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>

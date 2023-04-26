@@ -35,4 +35,14 @@
         font-size: 32px;
     }
 }
+
+@media (max-width: 980px) {
+    h1 {
+        font-size: 6vw !important;
+    }
+    h2 {
+        font-size: 4vw !important;
+    }
+}
+
 </style>

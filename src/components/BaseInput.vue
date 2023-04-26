@@ -1,23 +1,33 @@
 <script setup lang="ts">
 interface Props {
     width: number,
+    modelValue?: any,
     type?: string,
     placehoder?: string,
-    required?: boolean
-}
+    required?: boolean,
+};
 
 const props = withDefaults(defineProps<Props>(), {
     type: 'text',
     placehoder: '',
     required: false
-})
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const updateValue = (e: Event) => {
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
+};
 </script>
 
 <template>
-    <input class="input"  
+    <input class="input"
+    :value="modelValue"
     :type="props.type" 
     :placeholder="props.placehoder" 
-    :required="props.required">
+    :required="props.required"
+    @input="updateValue"
+>
 </template>
 
 <style scoped lang="scss">

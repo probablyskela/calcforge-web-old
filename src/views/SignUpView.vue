@@ -2,20 +2,39 @@
 import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import { RouterLink } from 'vue-router';
+import { ref } from 'vue';
+import { sign_in, sign_up } from '@/assets/services/user';
+import VueCookies from 'vue-cookies';
+import router from '@/router';
+
+if (VueCookies.isKey('token')) {
+    router.push('/profile');
+}
+
+
+const username = ref("")
+const email = ref("")
+const password = ref("")
+const password_confirm = ref("")
+
+async function create_user() {
+    await sign_up(username.value, email.value, password.value, password_confirm.value);
+    await sign_in(username.value, password.value)
+}
 
 </script>
 
 <template>
     <main class="main">
         <div class="wrapper">
-            <form class="sign-up__form">
+            <form @submit.prevent="create_user" class="sign-up__form">
                 <h2>sign up</h2>
 
-                <BaseInput :width="240" placehoder="username" required></BaseInput>
-                <BaseInput :width="240" type="email" placehoder="username" required></BaseInput>
+                <BaseInput v-model="username" :width="240" placehoder="username" required></BaseInput>
+                <BaseInput v-model="email" :width="240" type="email" placehoder="email" required></BaseInput>
 
-                <BaseInput :width="240" type="password" placehoder="password" required></BaseInput>
-                <BaseInput :width="240" type="password" placehoder="confirm password" required></BaseInput>
+                <BaseInput v-model="password" :width="240" type="password" placehoder="password" required></BaseInput>
+                <BaseInput v-model="password_confirm" :width="240" type="password" placehoder="confirm password" required></BaseInput>
 
                 <BaseButton :width="200">sign up</BaseButton>
 

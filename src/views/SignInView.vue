@@ -2,17 +2,27 @@
 import BaseInput from '@/components/BaseInput.vue';
 import BaseButton from '@/components/BaseButton.vue';
 import { RouterLink } from 'vue-router';
+import {ref} from 'vue';
+import {sign_in} from '@/assets/services/user';
+import VueCookies from 'vue-cookies';
+import router from '@/router';
+
+if (VueCookies.isKey('token')) {
+    router.push('/profile');
+}
+
+const username = ref("")
+const password = ref("")
 
 </script>
 
 <template>
     <main class="main">
         <div class="wrapper">
-            <form class="sign-in__form">
+            <form @submit.prevent="sign_in(username, password)" class="sign-in__form">
                 <h2>sign in</h2>
-
-                <BaseInput :width="240" placehoder="username" required></BaseInput>
-                <BaseInput :width="240" type="password" placehoder="password" required></BaseInput>
+                <BaseInput v-model="username" :width="240" placehoder="username" required></BaseInput>
+                <BaseInput v-model="password" :width="240" type="password" placehoder="password" required></BaseInput>
                 <BaseButton :width="200">sign in</BaseButton>
 
                 <p>dont have an account yet?
@@ -28,11 +38,10 @@ import { RouterLink } from 'vue-router';
     @include base-section();
     min-height: calc(100vh - 160px);
 
-
     a { 
-    @include link-underline($dark-main);
-    @include fix-text();
-  }
+        @include link-underline($dark-main);
+        @include fix-text();
+    }
 
     .wrapper {
         width: 100%;
